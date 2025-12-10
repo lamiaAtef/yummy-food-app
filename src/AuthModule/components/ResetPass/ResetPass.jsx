@@ -34,7 +34,6 @@ export default function ResetPass() {
   }
   return (
      <div className={`${defaultCol} bg-white p-4`} >
-         <div className={`${defaultCol} bg-white p-4 `} >
               <div className=' text-center  '>
                 <img src={logo} alt="food-app logo "  className='w-50'/>
               </div>
@@ -42,7 +41,6 @@ export default function ResetPass() {
                 <h2> Reset  Password</h2>
                 <p>Please Enter Your Otp  or Check Your Inbox</p>
               </div>
-          </div>
             <form  onSubmit={handleSubmit(onSubmit)}>
             <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
