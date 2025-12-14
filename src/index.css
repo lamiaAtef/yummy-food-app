@@ -40,3 +40,30 @@
     font-family: var(--sec-font);
 
 }
+.header_bg{
+    background: #009247;
+
+}
+
+.ps-menu-button{
+    transition: 1s;
+}
+.bg-sideBar .css-dip3t8{
+      background: #1F263E !important;
+    border-top-right-radius: 58px;
+    min-height: 100vh;
+
+}
+.ps-menu-button:hover
+{
+    background: #0092471A !important;
+    border-left: 4px solid  #009247;
+
+
+}
+.home{
+    background: #F0FFEF;
+
+}
+
+

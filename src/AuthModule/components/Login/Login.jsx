@@ -21,6 +21,7 @@ export default function Login() {
     try{
          let response = await axios.post("https://upskilling-egypt.com:3006/api/v1/Users/Login",data)
          navigate("/dashboard")
+         localStorage.setItem("token",response.data.token)
          toast.success(response.data.message,{autoClose: 2000,pauseOnHover: false})
     }
     catch(error){
@@ -62,7 +63,7 @@ export default function Login() {
                 {...register("password",PASSWORD_VALIDATION)}
                 
                 />
-            <button className='border-0 ' type='button' onClick={setshowPassword}>{showPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</button>
+            <button className='border-0 '  onClick={setshowPassword}>{showPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</button>
             
           </div>
           {errors.password&&<div className='alert alert-danger'>{errors.password.message}</div>}

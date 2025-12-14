@@ -14,11 +14,12 @@ import NotFound from "./SharedComponents/components/NotFound/NotFound"
 import MasterLayout from "./SharedComponents/components/MasterLayout/MasterLayout"
 import Dashboard from "./DashboradModule/Dashboard/Dashboard"
 import RecipeData from "./RecipeModule/components/RecipeData/RecipeData"
-import RecipeList from "./RecipeModule/components/RecipesList/RecipesList"
+import RecipesList from './RecipeModule/components/RecipesList/RecipesList'
 import CategoryData from "./CategoryModule/components/CategoryData/CategoryData"
 import CategoryList from "./CategoryModule/components/CategoriesList/CategoriesList"
 import UsersList from "./UserModule/components/UsersList/UsersList"
 import { ToastContainer } from 'react-toastify'
+
 
 
 
@@ -44,7 +45,7 @@ function App() {
       errorElement:<NotFound/>,
       children:[
         {index:true,element:<Dashboard/>},
-        {path:"recipes",element:<RecipeList/>},
+        {path:"recipes",element:<RecipesList/>},
         {path:"recipe-date",element:<RecipeData/>},
         {path:"categories",element:<CategoryList/>},
         {path:"category-data",element:<CategoryData/>},
