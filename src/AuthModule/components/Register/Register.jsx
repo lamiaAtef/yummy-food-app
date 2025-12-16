@@ -2,9 +2,9 @@ import React, { use, useState } from 'react'
 import logo from "../../../assets/images/logo.png"
 import { useForm } from 'react-hook-form'
 import { Link, useOutletContext } from 'react-router-dom'
-import {  EMAIL_VALIDATION, NAME_VALIDATION, PASSWORD_VALIDATION, PHONE_VALIDATION, REQUIRED_VALIDATION } from '../../../Constants/VALIDATION'
+import {  EMAIL_VALIDATION, NAME_VALIDATION, PASSWORD_VALIDATION, PHONE_VALIDATION, REQUIRED_VALIDATION } from '../../../Constants/validation'
 import axios from 'axios'
-import useToggle from '../../../CustomHook/UseToggle'
+import useToggle from '../../../hooks/UseToggle'
 export default function Register() {
   const[showPassword,setshowPassword]=useToggle()
   const[showConfirmPassword,setshowConfirmPassword]=useToggle()
@@ -119,7 +119,7 @@ export default function Register() {
                               {...register("password",PASSWORD_VALIDATION)}
                               
                               />
-                          <button className='border-0 ' type='button' onClick={setshowPassword}>{showPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</button>
+                          <span className='d-flex me-2 align-items-center' onClick={setshowPassword}>{showPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</span>
                           
                </div>
               {errors.password&&<div className='alert alert-danger'>{errors.password.message}</div>}
@@ -136,7 +136,7 @@ export default function Register() {
                             {...register("confirmPassword",{...PASSWORD_VALIDATION,validate:value=>value===password || "Passwords do not match"})}
                             
                             />
-                        <button className='border-0 ' type='button' onClick={setshowConfirmPassword}>{showConfirmPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</button>
+                        <span className='d-flex me-2 align-items-center'  onClick={setshowConfirmPassword}>{showConfirmPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</span>
                         
              </div>
              {errors.confirmPassword&&<div className='alert alert-danger'>{errors.confirmPassword.message}</div>}

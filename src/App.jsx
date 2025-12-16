@@ -19,6 +19,7 @@ import CategoryData from "./CategoryModule/components/CategoryData/CategoryData"
 import CategoryList from "./CategoryModule/components/CategoriesList/CategoriesList"
 import UsersList from "./UserModule/components/UsersList/UsersList"
 import { ToastContainer } from 'react-toastify'
+import { SidebarProvider } from './context/SidebarContext'
 
 
 
@@ -56,8 +57,10 @@ function App() {
   ])
   return (
     <>
-    <ToastContainer/>
-    <RouterProvider router={routes}></RouterProvider>
+      <ToastContainer/>
+      <SidebarProvider>
+      <RouterProvider router={routes}></RouterProvider>
+    </SidebarProvider>
     </>
   )
 }

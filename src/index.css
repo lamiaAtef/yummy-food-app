@@ -65,5 +65,18 @@
     background: #F0FFEF;
 
 }
+.form-control{
+    border: none;
+}
+.form-control:focus{
+    box-shadow: none;
+   
 
-
+}
+.input-group{
+    border: 1px solid rgba(128, 128, 128, 0.456);
+    transition: .3s;
+}
+.input-group:focus{
+    border: 1px solid green;
+}

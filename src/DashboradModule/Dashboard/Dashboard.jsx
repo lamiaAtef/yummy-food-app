@@ -13,7 +13,7 @@ export default function Dashboard() {
         <h4>Fill the <span className='main_color fw-bold' >Recipes</span> ! </h4>
         <p>you can now fill the meals easily using the table and form , click here and sill it with the table !</p>
       </div>
-      <button onClick={()=>{navigate("/dashboard/recipes")}} className='btn auth_btn bg-main-color '>Fill Recipes <i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></button>
+      <button onClick={()=>{navigate("/dashboard/recipes")}} className='btn auth_btn bg-main-color '>Fill Recipes <i className="fa fa-arrow-right ms-3" aria-hidden="true"></i></button>
     </div>
     </>
   )

@@ -4,7 +4,7 @@ import logo from "../../../assets/images/logo.png"
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { EMAIL_VALIDATION } from '../../../Constants/VALIDATION'
+import { EMAIL_VALIDATION } from '../../../Constants/validation'
 
 export default function ForgetPass() {
   let {defaultCol} = useOutletContext()
@@ -19,7 +19,7 @@ export default function ForgetPass() {
     try{
         let response = await axios.post("https://upskilling-egypt.com:3006/api/v1/Users/Reset/Request",data)
         toast.success(response.data.message)
-        navigate("/reset-pass")
+       navigate("/reset-pass", { state: { email: data.email } });
        
     }
     catch(error){

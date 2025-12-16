@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom'
 import logo from "../../../assets/images/logo.png"
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
-import { EMAIL_VALIDATION, PASSWORD_VALIDATION, REQUIRED_VALIDATION } from '../../../Constants/VALIDATION'
-import useToggle from '../../../CustomHook/UseToggle'
+import { EMAIL_VALIDATION, PASSWORD_VALIDATION, REQUIRED_VALIDATION } from '../../../Constants/validation'
+import useToggle from '../../../hooks/UseToggle'
 import { toast } from 'react-toastify'
 
 
@@ -12,6 +12,11 @@ export default function ResetPass() {
   let {defaultCol} = useOutletContext()
   const[showPassword,setshowPassword]=useToggle()
   const[showConfirmPassword,setshowConfirmPassword]=useToggle()
+  const location = useLocation()
+  const emailData = location.state?.email|| "";
+
+  console.log(location.state?.email)
+  
    let navigate = useNavigate()
    const {
     register,
@@ -19,6 +24,8 @@ export default function ResetPass() {
     watch,
     formState: { errors },
   } = useForm();
+  
+
   const password = watch("password");
   let onSubmit = async(data) =>{
     try{
@@ -49,6 +56,7 @@ export default function ResetPass() {
                   placeholder="Enter Your E-mail" 
                   aria-label="Username" 
                   aria-describedby="basic-addon1"
+                   defaultValue={emailData}
                   {...register("email",EMAIL_VALIDATION)}
                 />  
             </div>
@@ -77,7 +85,7 @@ export default function ResetPass() {
                           {...register("password",PASSWORD_VALIDATION)}
                           
                           />
-                      <button className='border-0 ' type='button' onClick={setshowPassword}>{showPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</button>
+                      <span className='d-flex me-2 align-items-center'  onClick={setshowPassword}>{showPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</span>
                       
             </div>
             {errors.password&&<div className='alert alert-danger'>{errors.password.message}</div>}
@@ -93,7 +101,7 @@ export default function ResetPass() {
                           {...register("confirmPassword",{...PASSWORD_VALIDATION,validate:value=>value===password || "Passwords do not match"})}
                           
                           />
-                      <button className='border-0 ' type='button' onClick={setshowConfirmPassword}>{showConfirmPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</button>
+                      <span className='d-flex me-2 align-items-center'  onClick={setshowConfirmPassword}>{showConfirmPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</span>
                       
             </div>
             {errors.confirmPassword&&<div className='alert alert-danger'>{errors.confirmPassword.message}</div>}

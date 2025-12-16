@@ -3,10 +3,10 @@ import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import logo from "../../../assets/images/logo.png"
 import Password from '../../../minicomponents/Password/Password'
 import { useForm } from 'react-hook-form'
-import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '../../../Constants/VALIDATION'
+import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '../../../Constants/validation.js'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import useToggle from '../../../CustomHook/UseToggle'
+import useToggle from '../../../hooks/UseToggle'
 
 export default function Login() {
   const[showPassword,setshowPassword]=useToggle()
@@ -40,7 +40,7 @@ export default function Login() {
         <p>Welcome Back! Please enter your details</p>
       </div>
       <form  onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-group mb-3">
+        <div className="input-group mb-3  ">
             <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
             <input type="text"
              className="form-control"
@@ -52,7 +52,7 @@ export default function Login() {
              
         </div>
          {errors.email&&<div className='alert alert-danger'>{errors.email.message}</div>}
-          <div className="input-group mb-3">
+          <div className="input-group mb-3 ">
             <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-lock"></i></span>
             <input
              type={showPassword?"text":"password"}
@@ -60,10 +60,11 @@ export default function Login() {
                placeholder="Password" 
                aria-label="Username"
                 aria-describedby="basic-addon1"
+                
                 {...register("password",PASSWORD_VALIDATION)}
                 
                 />
-            <button className='border-0 '  onClick={setshowPassword}>{showPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</button>
+            <span className='d-flex me-2 align-items-center' onClick={setshowPassword}>{showPassword?<i className="fa-solid fa-eye-slash"></i>:<i className="fa-solid fa-eye"></i>}</span>
             
           </div>
           {errors.password&&<div className='alert alert-danger'>{errors.password.message}</div>}
