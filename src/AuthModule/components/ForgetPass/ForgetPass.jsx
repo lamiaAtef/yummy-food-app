@@ -48,7 +48,7 @@ export default function ForgetPass() {
                      
                 </div>
                  {errors.email&&<div className='alert alert-danger'>{errors.email.message}</div>}
-                 <button className='btn bg-main-color w-100 auth_btn'>Submit</button>
+                 <button className='btn bg-main-color w-100 auth_btn' >Submit</button>
           </form>
     </div>
   )

@@ -20,6 +20,11 @@ import CategoryList from "./CategoryModule/components/CategoriesList/CategoriesL
 import UsersList from "./UserModule/components/UsersList/UsersList"
 import { ToastContainer } from 'react-toastify'
 import { SidebarProvider } from './context/SidebarContext'
+import AuthContextProvider, { AuthContext } from './context/AuthContext'
+import ProtectedRoute from './SharedComponents/components/ProtectedRoute/ProtectedRoute'
+import CategoryContextProvider from './context/CategoryContext'
+import UsersContext from './context/UsersContext'
+import UsersContextProvider from './context/UsersContext'
 
 
 
@@ -42,12 +47,12 @@ function App() {
     },
     {
       path:"dashboard",
-      element:<MasterLayout/>,
+      element:(<ProtectedRoute> <MasterLayout/> </ProtectedRoute>),
       errorElement:<NotFound/>,
       children:[
         {index:true,element:<Dashboard/>},
         {path:"recipes",element:<RecipesList/>},
-        {path:"recipe-date",element:<RecipeData/>},
+        {path:"recipe-date/:id?",element:<RecipeData/>},
         {path:"categories",element:<CategoryList/>},
         {path:"category-data",element:<CategoryData/>},
         {path:"users",element:<UsersList/>}
@@ -58,9 +63,16 @@ function App() {
   return (
     <>
       <ToastContainer/>
+      <AuthContextProvider>
+        <CategoryContextProvider>
+     <UsersContextProvider>
       <SidebarProvider>
       <RouterProvider router={routes}></RouterProvider>
+
     </SidebarProvider>
+    </UsersContextProvider>
+    </CategoryContextProvider>
+    </AuthContextProvider>
     </>
   )
 }

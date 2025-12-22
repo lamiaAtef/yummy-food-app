@@ -42,9 +42,21 @@
 }
 .header_bg{
     background: #009247;
+    position: relative;
+    overflow: hidden;
 
 }
-
+.headerSvg {
+  position: absolute;
+  inset: 0;              
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.header_bg .content {
+  position: relative;
+  z-index: 1;
+}
 .ps-menu-button{
     transition: 1s;
 }
@@ -80,3 +92,152 @@
 .input-group:focus{
     border: 1px solid green;
 }
+
+.dropDownMenu{
+    background-color: #fff ; 
+    box-shadow: 0px 0px 16px 0px #0000001A;
+    border-radius: 15px;
+    /* list-style: none; */
+    padding: 0;
+    /* position: relative; */
+    border:0
+    
+}
+/* .dropDownMenu::before{
+    content: "";
+    position: absolute;
+    top:-20px;
+    right:15px;
+    width: 20px;
+    border:10px solid ;
+    border-color: transparent transparent #fff transparent;
+   
+} */
+ .arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  position: absolute;
+  top: -10px;
+  right: 15px;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+.list_item{
+    cursor: pointer;
+    transition: .2s;
+   
+}
+.list_item:hover{
+    background: #F8F9FB;
+
+}
+.list_item i {
+    color:var(--main-color);
+    margin-right: 10px;
+}
+.delete_confirmation_btn{
+    border: 1px solid #CC0000
+}
+.delete_btn{
+    transition: .3s;
+    color:  #CC0000;
+    border: 1px solid  #CC0000;
+
+;
+}
+.delete_btn:hover{
+    background-color:  #CC0000;
+    color: white;
+    border-color: white;
+}
+.customTableColor{
+   background: #E2E5EB !important;
+   color:  #1F263E;
+
+}
+.main_dash_btn{
+    background: #009247;
+    color: #fff;
+    transition: .3s;
+    padding: 10px 30px ;
+    border-radius: 8px;
+    border: 1px solid #fff;
+
+}
+.main_dash_btn:hover{
+    color:#009247;
+    background-color: #fff;
+    border:1px solid #009247;
+
+}
+.input-group-text{
+    border:none !important;
+}
+.bg_header{
+background: #F0FFEF;
+border-radius: 15px;
+height: 167px;
+
+}
+form input , textarea , select{
+    background: #F7F7F7 !important;
+
+
+}
+.cancel_btn{
+    color: #009247;
+    background-color: #fff;
+    border: 1px solid #009247;
+    transition: .3s;
+    padding: 10px 30px ;
+    margin-right: 10px;
+    border-radius: 8px;
+}
+.cancel_btn:hover{
+    color: #fff;
+    background-color: #009247;
+    border: 1px solid #009247;
+
+
+}
+.no-arrows::-webkit-inner-spin-button,
+.no-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-arrows {
+  -moz-appearance: textfield;
+}
+
+.upload-box {
+  border: 2px dashed #4caf50;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  color: #4caf50;
+  transition: 0.3s;
+}
+
+.upload-box:hover {
+  background-color: #f6fff6;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* search  input in nav  */
+.searchStyle{
+    border: 0 !important;
+    border-radius: 8px;
+    width: 60%;
+}
+
+
