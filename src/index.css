@@ -136,6 +136,11 @@
     background: #F8F9FB;
 
 }
+/* .list_item */
+.list_item:active,
+.list_item:focus {
+  color: #000 ; 
+}
 .list_item i {
     color:var(--main-color);
     margin-right: 10px;
@@ -159,6 +164,10 @@
    background: #E2E5EB !important;
    color:  #1F263E;
 
+}
+.table-wrapper{
+    width: 100%;
+    overflow-x: auto;
 }
 .main_dash_btn{
     background: #009247;

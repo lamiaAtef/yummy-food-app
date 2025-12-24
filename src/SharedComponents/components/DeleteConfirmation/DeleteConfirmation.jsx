@@ -6,6 +6,7 @@ export default function DeleteConfirmation({
   onClose,
   onConfirm,
   deletedElement = "item",
+  itemName 
 }) {
   if (!show) return null;
   console.log("show",show)
@@ -24,7 +25,8 @@ export default function DeleteConfirmation({
               <img src={notFoundImg} alt="" className="mb-3" />
               <h5>Delete this {deletedElement}?</h5>
               <p>
-                Are you sure you want to delete this {deletedElement}?
+                Are you sure you want to delete this  <span className="text-danger">{itemName}</span>?
+                <br></br>
                 This action cannot be undone.
               </p>
             </div>

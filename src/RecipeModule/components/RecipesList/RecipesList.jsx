@@ -1,30 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../../../SharedComponents/components/Header/Header'
 import headerImg from "../../../assets/images/h2.png"
 import axios from 'axios'
 import NotFound from '../../../SharedComponents/components/NotFound/NotFound'
-import useRecipe from '../../../hooks/useRecipe'
 import { BeatLoader } from 'react-spinners'
 import DropDownButton from '../../../SharedComponents/components/DropDownButton/DropDownButton'
 import DeleteConfirmation from '../../../SharedComponents/components/DeleteConfirmation/DeleteConfirmation'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { RecipesContext } from '../../../context/RecipesContext'
+import NoData from '../../../SharedComponents/components/NoData/NoData'
 
 export default function RecipesList() {
 
-   const {  recipesList,
+  console.log("hena")
+  let context = useContext(RecipesContext)
+  console.log("RecipesContext in RecipesList:", context);
+
+if (!context) {
+  throw new Error("RecipesContext is undefined  Provider missing");
+}
+
+   const {
+     recipesList,
     loading,
     error,
     getRecipes,
     deleteRecipe,
-    updateRecipe, } = useRecipe();
+    updateRecipe, } = useContext(RecipesContext);
+    
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
+    const [selectedName, setSelectedName] = useState(null);
     let navigate = useNavigate()
     let locatoin = useLocation()
 
-const openDeleteModal = (id) => {
+const openDeleteModal = (id,name) => {
   setSelectedId(id);
+  setSelectedName(name)
   setShowDeleteModal(true);
 };
 
@@ -63,7 +76,7 @@ useEffect(() => {
             <button className='main_dash_btn' onClick={()=>navigate("/dashboard/recipe-date")}>Add New Item</button>
           </div>
         </div>
-      <div >
+      <div className="table-wrapper my-5" >
               <table className="table">
                 <thead  style={{background: "#E2E5EB"}}>
                   <tr >
@@ -110,7 +123,7 @@ useEffect(() => {
                 delete: {
                   label: "Delete",
                   icon: "fa-solid fa-trash",
-                  onClick: () => openDeleteModal(recipe.id),
+                  onClick: () => openDeleteModal(recipe.id,recipe.name),
                   class:"text-danger"
                 },
               }}
@@ -121,7 +134,7 @@ useEffect(() => {
     : (
         <tr>
           <td colSpan="7" className="text-center">
-            <NotFound />
+           <NoData/> 
           </td>
         </tr>
       )
@@ -132,6 +145,7 @@ useEffect(() => {
               <DeleteConfirmation
                   show={showDeleteModal}
                   deletedElement="recipe"
+                  itemName={selectedName}
                   onClose={closeDeleteModal}
                   onConfirm={() => {
                     deleteRecipe(selectedId);

@@ -1,14 +1,16 @@
 import React, { use, useState } from 'react'
 import logo from "../../../assets/images/logo.png"
 import { useForm } from 'react-hook-form'
-import { Link, useOutletContext } from 'react-router-dom'
+import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import {  EMAIL_VALIDATION, NAME_VALIDATION, PASSWORD_VALIDATION, PHONE_VALIDATION, REQUIRED_VALIDATION } from '../../../Constants/validation'
 import axios from 'axios'
 import useToggle from '../../../hooks/UseToggle'
+import { toast } from 'react-toastify'
 export default function Register() {
   const[showPassword,setshowPassword]=useToggle()
   const[showConfirmPassword,setshowConfirmPassword]=useToggle()
   let {defaultCol} = useOutletContext()
+  let navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -19,11 +21,14 @@ export default function Register() {
    let onSubmit = async(data) =>{
     try{
           let response = await axios.post("https://upskilling-egypt.com:3006/api/v1/Users/Register",data)
-          console.log(response)
+          // console.log(response)
+          toast.success("success register")
+          navigate("/login")
 
     }
     catch(error){
-      console.log(error)
+      // console.log(error)
+      toast.error("sorry!"+error)
     }
    }
   return (

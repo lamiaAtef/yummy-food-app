@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { createContext } from "react";
 import axiosClient from '../api/axiosClient';
-
+import { toast } from 'react-toastify';
 
 
 
@@ -48,31 +48,41 @@ export default function CategoryContextProvider(props) {
     const deleteCategory =async (id) => {
         try {
         await axiosClient.delete(`/api/v1/Category/${id}`);
+        toast.success("category deleted successfuly");
+      
         setCategoryList((prev) => prev.filter((r) => r.id !== id));
         console.log("done")
       } catch (err) {
         setError(err);
+        toast.error("Category can't be deleted")
       }
     }
     const updateCategory = async (id, data) => {
     try {
       const res = await axiosClient.put(`/api/v1/Category/${id}`, data);
+     toast.success("category updated successfuly");
+
       getCategory()
       // setCategoryList((prev) =>
       //   prev.map((r) => (r.id === id ? res.data.data : r))
       // );
     } catch (err) {
+      toast.error("Category can't be updated");
+
       setError(err);
     }
   };
    const addCategory = async (data) => {
     try {
       const res = await axiosClient.post(`/api/v1/Category/`, data);
+      toast.success("category added successfully")
       getCategory()
+
       
     
     } catch (err) {
       setError(err);
+      toast.error("category can't be added")
       
     }
   };

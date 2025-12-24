@@ -6,6 +6,7 @@ import { CategoryContext } from '../../../context/CategoryContext';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { UsersContext } from '../../../context/UsersContext';
+import { RecipesContext } from '../../../context/RecipesContext';
 
 export default function NavBar() {
   let [currentPage ,setCurrentPage] = useState();
@@ -14,8 +15,11 @@ export default function NavBar() {
   const{loginData} = useContext(AuthContext)
   const{searchCategory} = useContext(CategoryContext)
   const{searchUsers} =  useContext(UsersContext)
+  const{searchRecipes} =  useContext(RecipesContext)
+
+
   const handleSearch = (searchText) => {
-        if (currentPage === "/dashboard/recipes") return//searchRecipes(searchText);
+        if (currentPage === "/dashboard/recipes") return searchRecipes(searchText);
         else if (currentPage === "/dashboard/categories") searchCategory(searchText);
         else if (currentPage === "/dashboard/users") searchUsers(searchText);
   };

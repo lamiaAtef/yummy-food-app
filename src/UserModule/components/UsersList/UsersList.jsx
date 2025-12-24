@@ -12,10 +12,12 @@ export default function UsersList() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [openId, setOpenId] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
+  const [selectedName, setSelectedName] = useState(null);
 
 
-  const openDeleteModal = (id) => {
+  const openDeleteModal = (id,name) => {
     setSelectedId(id);
+    setSelectedName(name)
     setShowDeleteModal(true);
   };
   const closeDeleteModal = () => {
@@ -35,15 +37,15 @@ export default function UsersList() {
           <h2>Users Table Details</h2>
           <p>You can check all details</p>
        </div>
-         <table className="table">
-                 <thead>
+         <table className="table table-wrapper my-5">
+                 <thead style={{background: "#E2E5EB"}}>
                    <tr>
-                     <th scope="col"> User Name</th>
-                     <th scope="col">email</th>
-                     <th scope="col">country</th>      
-                     <th scope='col'>phoneNumber</th>
-                     <th scope='col'>group</th>
-                     <th scope='col'>action</th>
+                     <th scope="col" className='customTableColor' > User Name</th>
+                     <th scope="col" className='customTableColor' >email</th>
+                     <th scope="col" className='customTableColor' >country</th>      
+                     <th scope='col' className='customTableColor' >phoneNumber</th>
+                     <th scope='col' className='customTableColor' >group</th>
+                     <th scope='col' className='customTableColor' >action</th>
                    </tr>
                  </thead>
                  <tbody>
@@ -68,8 +70,9 @@ export default function UsersList() {
                        delete: {
                          label: "Delete",
                          icon: "fa-solid fa-trash",
-                         onClick: () => openDeleteModal(users.id),
-                         class:"text-danger"
+                         onClick: () => openDeleteModal(users.id,users.userName),
+                         class:"text-danger",
+
                        },
                      }}
                    />
@@ -87,11 +90,14 @@ export default function UsersList() {
        </table>
         <DeleteConfirmation
                      show={showDeleteModal}
+                     itemName={selectedName}
                      deletedElement="User"
                      onClose={closeDeleteModal}
+                     
                      onConfirm={() => {
                     deleteUser(selectedId);
                     closeDeleteModal();
+                    
                  }}/>
       
     </>

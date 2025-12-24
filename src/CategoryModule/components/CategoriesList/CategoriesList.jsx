@@ -36,9 +36,10 @@ const[modalTitle,setModalTitle] = useState()
 const {register, handleSubmit, formState:{errors}, reset} = useForm()
 
 const[categoryId,setCategoryId] = useState(null)
+const [selectedName, setSelectedName] = useState(null);
 
 
- const handleShow = async(id) => {
+ const handleShow = async(id,name) => {
   setShow(true)
 
   if(id){
@@ -60,8 +61,9 @@ const[categoryId,setCategoryId] = useState(null)
 
   };
 
- const openDeleteModal = (id) => {
+ const openDeleteModal = (id,name) => {
    setSelectedId(id);
+   setSelectedName(name)
    setShowDeleteModal(true);
  };
  
@@ -101,7 +103,7 @@ const[categoryId,setCategoryId] = useState(null)
             <p>You can check all details</p>
           </div>
           <div>
-            <button className='main_dash_btn' onClick={()=>{setCategoryId(null),handleShow(null)}}>Add New Item</button>
+            <button className='main_dash_btn' onClick={()=>{setCategoryId(null),handleShow(null,null)}}>Add New Item</button>
           </div>
         </div>
       <div >
@@ -128,13 +130,13 @@ const[categoryId,setCategoryId] = useState(null)
               
           
       </Modal>
-        <table className="table">
-          <thead>
+        <table className="table table-wrapper my-5">
+          <thead style={{background: "#E2E5EB"}}>
             <tr>
-              <th scope="col">id</th>
-              <th scope="col">name</th>
-              <th scope="col">creationDate</th>
-              <th scope='col'>action</th>
+              <th scope="col" className='customTableColor' >id</th>
+              <th scope="col" className='customTableColor' >name</th>
+              <th scope="col" className='customTableColor' >creationDate</th>
+              <th scope='col' className='customTableColor' >action</th>
             </tr>
           </thead>
           <tbody>
@@ -161,7 +163,7 @@ const[categoryId,setCategoryId] = useState(null)
                 delete: {
                   label: "Delete",
                   icon: "fa-solid fa-trash",
-                  onClick: () => openDeleteModal(category.id),
+                  onClick: () => openDeleteModal(category.id,category.name),
                   class:"text-danger"
                 },
               }}
@@ -181,6 +183,7 @@ const[categoryId,setCategoryId] = useState(null)
          <DeleteConfirmation
               show={showDeleteModal}
               deletedElement="category"
+               itemName={selectedName}
               onClose={closeDeleteModal}
               onConfirm={() => {
                 deleteCategory(selectedId);

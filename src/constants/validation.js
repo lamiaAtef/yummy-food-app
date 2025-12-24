@@ -18,8 +18,8 @@ export const PASSWORD_VALIDATION={
 export const NAME_VALIDATION= {
     required:"name is required",
     pattern:{
-        value:/^[A-Za-z\u0600-\u06FF ]{3,30}$/,
-        message:"your name should contain 3 letters at least \n No numbers or symbols allowed."
+        value:/^(?=.{4,}$)[A-Za-z]+[0-9]+$/,
+        message:"The userName must contain characters and end with numbers without spaces.."
     }
 }
 export const PHONE_VALIDATION={

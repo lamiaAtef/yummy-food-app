@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import axiosClient from "../api/axiosClient"
+import { toast } from 'react-toastify';
 export const UsersContext = createContext();
 
 export default function UsersContextProvider({ children }) {
@@ -36,9 +37,11 @@ export default function UsersContextProvider({ children }) {
       console.log(id,"delete user")
       await axiosClient.delete(`/api/v1/Users/${id}`);
       setUsersList(prev => prev.filter(user => user.id !== id));
-      console.log("User deleted");
-    } catch (err) {
-      setError(err);
+      toast.success("User deleted");
+
+    } catch (error) {
+      setError(error);
+      toast.error("sorry! you can't delete this user")
     }
   };
 
@@ -54,7 +57,7 @@ export default function UsersContextProvider({ children }) {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  },[]);
 
   return (
     <UsersContext.Provider value={{

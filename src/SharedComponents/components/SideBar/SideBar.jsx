@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import logoSidebar from "../../../assets/images/logo-sidebar.png"
@@ -8,6 +8,25 @@ import { AuthContext } from '../../../context/AuthContext';
 export default function SideBar() {
 const {collapsed, setCollapsed,sidebarWidth}=useSidebar()
 const{logOut} = useContext(AuthContext)
+// start collapsed in small screen
+
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth < 768) { // لو الشاشة صغيرة
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
+    }
+  };
+
+  handleResize(); // لتطبيق الحالة عند أول تحميل
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
+
+//end collapsed in small screen
 
   return (
     <>
