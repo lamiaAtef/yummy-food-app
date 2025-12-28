@@ -14,7 +14,7 @@ export default function CategoryContextProvider(props) {
     const [error, setError] = useState(null); const getCategory =async () => {  
       setLoading(true)
       try{
-          let response = await axiosClient.get(`/api/v1/Category/`)
+          let response = await axiosClient.get(`/Category/`)
           setCategoryList(response.data.data)
           setOrganicCategoryList(response.data.data)
       }
@@ -31,7 +31,7 @@ export default function CategoryContextProvider(props) {
     const getCategoryById =async (id) => {  
       setLoading(true)
       try{
-          let response = await axiosClient.get(`/api/v1/Category/${id}`)
+          let response = await axiosClient.get(`/Category/${id}`)
           return response.data
       }
       catch(error){
@@ -47,7 +47,7 @@ export default function CategoryContextProvider(props) {
 
     const deleteCategory =async (id) => {
         try {
-        await axiosClient.delete(`/api/v1/Category/${id}`);
+        await axiosClient.delete(`/Category/${id}`);
         setCategoryList((prev) => prev.filter((r) => r.id !== id));
         console.log("done")
       } catch (err) {
@@ -56,7 +56,7 @@ export default function CategoryContextProvider(props) {
     }
     const updateCategory = async (id, data) => {
     try {
-      const res = await axiosClient.put(`/api/v1/Category/${id}`, data);
+      const res = await axiosClient.put(`/Category/${id}`, data);
       getCategory()
       // setCategoryList((prev) =>
       //   prev.map((r) => (r.id === id ? res.data.data : r))
@@ -67,7 +67,7 @@ export default function CategoryContextProvider(props) {
   };
    const addCategory = async (data) => {
     try {
-      const res = await axiosClient.post(`/api/v1/Category/`, data);
+      const res = await axiosClient.post(`/Category/`, data);
       getCategory()
       
     

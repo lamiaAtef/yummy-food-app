@@ -10,7 +10,6 @@ import ChangePass from './AuthModule/components/ChangePass/ChangePass'
 import ForgetPass from './AuthModule/components/ForgetPass/ForgetPass'
 import ResetPass from './AuthModule/components/ResetPass/ResetPass'
 import VerifyAccount from './AuthModule/components/VerifyAccount/VerifyAccount'
-import NotFound from "./SharedComponents/components/NotFound/NotFound"
 import MasterLayout from "./SharedComponents/components/MasterLayout/MasterLayout"
 import Dashboard from "./DashboradModule/Dashboard/Dashboard"
 import RecipeData from "./RecipeModule/components/RecipeData/RecipeData"
@@ -25,6 +24,9 @@ import ProtectedRoute from './SharedComponents/components/ProtectedRoute/Protect
 import CategoryContextProvider from './context/CategoryContext'
 import UsersContext from './context/UsersContext'
 import UsersContextProvider from './context/UsersContext'
+import RecipesContextProvider from './context/RecipesContext'
+import Favourites from './Favourites/Favourites'
+import NotFound from './SharedComponents/components/NotFound/NotFound'
 
 
 
@@ -47,23 +49,26 @@ function App() {
     },
     {
       path:"dashboard",
-      element:(<ProtectedRoute> <MasterLayout/> </ProtectedRoute>),
+      element:(<ProtectedRoute allowedRoles={['SuperAdmin','SystemUser']}> <MasterLayout/> </ProtectedRoute>),
       errorElement:<NotFound/>,
       children:[
-        {index:true,element:<Dashboard/>},
-        {path:"recipes",element:<RecipesList/>},
-        {path:"recipe-date/:id?",element:<RecipeData/>},
-        {path:"categories",element:<CategoryList/>},
-        {path:"category-data",element:<CategoryData/>},
-        {path:"users",element:<UsersList/>}
-
+        {index:true, element:<ProtectedRoute allowedRoles={['SuperAdmin','SystemUser']}><Dashboard/></ProtectedRoute> },
+        //  admin page
+        {path:"recipes",element:<ProtectedRoute allowedRoles={['SuperAdmin','SystemUser']}><RecipesList/></ProtectedRoute>},
+        {path:"recipe-date/:id?",element:<ProtectedRoute allowedRoles={['SuperAdmin']}><RecipeData/> </ProtectedRoute>},
+        {path:"categories",element:<ProtectedRoute allowedRoles={['SuperAdmin']}><CategoryList/> </ProtectedRoute>},
+        {path:"category-data",element:<ProtectedRoute allowedRoles={['SuperAdmin']}><CategoryData/> </ProtectedRoute>},
+        {path:"users",element:<ProtectedRoute allowedRoles={['SuperAdmin']}>  <UsersList/> </ProtectedRoute>},
+        // user page
+        {path:"favourite",element:<ProtectedRoute allowedRoles={['SystemUser']}><Favourites/>  </ProtectedRoute>},
       ]
     }
   ])
   return (
     <>
       <ToastContainer/>
-      <AuthContextProvider>
+      {/* <AuthContextProvider> */}
+        <RecipesContextProvider>
         <CategoryContextProvider>
      <UsersContextProvider>
       <SidebarProvider>
@@ -72,7 +77,8 @@ function App() {
     </SidebarProvider>
     </UsersContextProvider>
     </CategoryContextProvider>
-    </AuthContextProvider>
+    </RecipesContextProvider>
+    {/* </AuthContextProvider> */}
     </>
   )
 }

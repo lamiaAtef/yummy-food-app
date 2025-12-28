@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import UploadBox from '../../../SharedComponents/components/UploadBox/UploadBox';
-import useRecipe from '../../../hooks/useRecipe';
 import { useForm } from 'react-hook-form';
 import { CategoryContext } from '../../../context/CategoryContext';
+import { RecipesContext } from '../../../context/RecipesContext';
 
 export default function RecipeData() {
   const recipeImageRef = useRef(null);
   const {id} = useParams()
   const navigate = useNavigate()
   
-  const {getTags, tags, addRecipe, getRecipeById, updateRecipe} = useRecipe()
+  const {getTags, tags, addRecipe, getRecipeById, updateRecipe} = useContext(RecipesContext)
   const {getCategory, categoryList} = useContext(CategoryContext)
   
   const {register, handleSubmit, formState:{errors}, reset} = useForm()

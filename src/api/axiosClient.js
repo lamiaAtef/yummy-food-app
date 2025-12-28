@@ -1,8 +1,8 @@
 import axios from "axios";
 // import AuthService from "./AuthService"; // service layer مسؤول عن token/refresh
-
+import { baseURL } from "./apiURLs";
 const axiosClient = axios.create({
-  baseURL: "https://upskilling-egypt.com:3006",
+  baseURL,
   timeout: 5000,
  
 });

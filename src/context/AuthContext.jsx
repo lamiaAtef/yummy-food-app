@@ -1,38 +1,35 @@
-import { jwtDecode } from 'jwt-decode'
-import React, { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from "react";
+import {jwtDecode} from "jwt-decode";
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
-export default function AuthContextProvider(props){
+export default function AuthContextProvider({ children }) {
+  const [loginData, setLoginData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  const saveLoginData = () => {
+    const token = localStorage.getItem("token");
 
-    let [loginData,setLoginData] = useState(null)
-    let saveLoginData = () => {
-        let  encodedToken = localStorage.getItem("token")
-        if(encodedToken){
-            let decodedToken = jwtDecode(encodedToken)
-            setLoginData(decodedToken)
-            }
-        }
-        
-    let logOut = () => {
-        localStorage.removeItem("token")
-        setLoginData(null)
-        
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setLoginData(decoded);
+      } catch (error) {
+        console.log("Invalid token");
+        localStorage.removeItem("token");
+      }
     }
 
-       useEffect(()=>{
-        if (localStorage.getItem("token")){
-            saveLoginData()
-        }
-    },[])
-    return(
-        <AuthContext.Provider value={{loginData,saveLoginData,logOut}}>
-            {props.children}
-        </AuthContext.Provider>
+    setLoading(false);
+  };
 
-    )
+  useEffect(() => {
+    saveLoginData();
+  }, []);
 
-
+  return (
+    <AuthContext.Provider value={{ loginData, loading, setLoginData }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
-

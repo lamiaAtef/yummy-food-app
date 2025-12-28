@@ -12,7 +12,7 @@ export default function UsersContextProvider({ children }) {
   const getUsers = async () => {  
     setLoading(true);
     try {
-      let response = await axiosClient.get(`/api/v1/Users/`);
+      let response = await axiosClient.get(`/Users/`);
       setUsersList(response.data.data);
       setOrganicUsersList(response.data.data);
     } catch (err) {
@@ -24,7 +24,7 @@ export default function UsersContextProvider({ children }) {
 
   const getUsersById = async (id) => {  
     try {
-      let response = await axiosClient.get(`/api/v1/Users/${id}`);
+      let response = await axiosClient.get(`/Users/${id}`);
       return response.data;
     } catch (err) {
       setError(err);
@@ -34,7 +34,7 @@ export default function UsersContextProvider({ children }) {
   const deleteUser = async (id) => {
     try {
       console.log(id,"delete user")
-      await axiosClient.delete(`/api/v1/Users/${id}`);
+      await axiosClient.delete(`/Users/${id}`);
       setUsersList(prev => prev.filter(user => user.id !== id));
       console.log("User deleted");
     } catch (err) {
